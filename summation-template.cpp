@@ -10,11 +10,11 @@
 using namespace std;
 
 // #define constants become consts
-const int N = 10;
+const int N = 40;
 
 // The following is a template for universal summation
 template <class T>
-void summation(T& sum, T size, vector<T> data) {
+inline void summation(T& sum, T size, vector<T>& data) {
 	for(int i=0; i<size; i++) {
 		sum += data[i];
 	}
@@ -29,7 +29,7 @@ int main() {
 	
 	summation(sum, N, data);
 	
-	printf("sum is %d\n", sum);
+	printf("Sum is %d\n", sum);
 	return 0;
 
 }
