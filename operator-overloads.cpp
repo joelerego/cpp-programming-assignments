@@ -2,26 +2,19 @@
 
 using namespace std;
 
-typedef enum days {SUN, MON, TUE, WED, THU, FRI, SAT} days;
+typedef enum days:std::int8_t {SUN, MON, TUE, WED, THU, FRI, SAT} days;
 
-ostream& operator<<(ostream& out, const days& d){ 
+ostream& operator<<(ostream& cout, const days& d){ 
 	switch(d) {
-		case SUN: out << "SUN";
-							break;
-		case MON: out << "MON";
-							break;
-		case TUE: out << "TUE";
-							break;
-		case WED: out << "WED";
-							break;
-		case THU: out << "THU";
-							break;
-		case FRI: out << "FRI";
-							break;
-		case SAT: out << "SAT";
-							break;
-	};
-	return out;
+		case SUN: cout << "SUN"; break; 
+		case MON: cout << "MON"; break; 
+		case TUE: cout << "TUE"; break; 
+		case WED: cout << "WED"; break; 
+		case THU: cout << "THU"; break; 
+		case FRI: cout << "FRI"; break; 
+		case SAT: cout << "SAT"; break; 
+	}
+	return cout;
 }
 
 inline days operator++(days& d) {
@@ -34,10 +27,16 @@ inline days operator++(days& d, int) {
 	return old;
 }
 
+inline days operator+(days& d, int a) {
+	d = static_cast<days>((static_cast<int>(d) + a) % 7);
+	return d;
+}
+
 int main() {
 	days a {days::FRI};
 	cout << a << endl;
 	cout << a++ << endl;
 	cout << ++a << endl;
+	cout << a+2 << endl;
 	return 0;
 }
