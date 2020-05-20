@@ -6,7 +6,7 @@ int count = 0;
 //Unary scope resolution operator
 void how_many(double w[], double n, int& count) {
 		for(int i=-0; i<5; i++) {
-			count += (w[i] == n);
+			count += (w[i] == n); 
 		}
 		++::count;		
 }
