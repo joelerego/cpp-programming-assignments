@@ -15,18 +15,28 @@ using namespace std;
 //
 class new_graph {
 public:
-	new_graph(int size = 5) {
+	new_graph(int size = 5): size(size) { // Default Constructor
 		graph = new bool*[size];
 		for(int i = 0; i < size; ++i)
 			graph[i] = new bool[size];		
 	}
-	~new_graph() {
+	void generate() {
+		for(int i=0; i<size; ++i) {
+			for(int j=0; j<size; ++j) {
+				srand(time(0));
+				if (i==j) graph[i][j] = false; // Enforce no loops
+				else graph[i][j] = graph[j][i] = (rand()%100 < 19);
+			}
+		} 
+	}
+	~new_graph() { // Destructor
 		delete graph;
 	}
 private:
-	bool** graph;	
+	bool** graph;
+	int size = 5;
 };
 
 int main() {
-	
+	new_graph g = { 5 };
 }
