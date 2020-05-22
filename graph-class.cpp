@@ -23,11 +23,25 @@ public:
 	void generate() {
 		for(int i=0; i<size; ++i) {
 			for(int j=0; j<size; ++j) {
-				srand(time(0));
 				if (i==j) graph[i][j] = false; // Enforce no loops
-				else graph[i][j] = graph[j][i] = (rand()%100 < 19);
+				else {
+					srand(clock());
+					graph[i][j] = graph[j][i] = ( rand()%100 > 19 );
+				}
 			}
 		} 
+	}
+	int graph_size() {
+		return size;
+	}
+	void print() {
+		for(int i=0; i<size; ++i) {
+			for(int j=0; j<size; ++j) {
+				cout << graph[i][j] << "\t";
+			}
+			cout << endl;			
+		}
+		
 	}
 	~new_graph() { // Destructor
 		delete graph;
@@ -39,4 +53,6 @@ private:
 
 int main() {
 	new_graph g = { 5 };
+	g.generate();
+	g.print();
 }
