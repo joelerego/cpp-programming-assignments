@@ -21,9 +21,9 @@ using namespace std;
 class new_graph {
 public:
 	new_graph(int size = 5): size(size) { // Default Constructor
-		graph = new bool*[size];
-		for(int i = 0; i < size; ++i)
-			graph[i] = new bool[size];		
+		graph = new bool*[5];
+		for(int i = 0; i < 5; ++i)
+			graph[i] = new bool[5];		
 	}
 	void generate() {
 		for(int i=0; i<size; ++i) {
@@ -34,7 +34,40 @@ public:
 					graph[i][j] = graph[j][i] = ( rand()%100 > 19 );
 				}
 			}
-		} 
+		}
+		
+		//Unit test
+		
+		graph[0][0] = 0;
+		graph[0][1] = 1;
+		graph[0][2] = 0;
+		graph[0][3] = 0;
+		graph[0][4] = 1;
+		
+		graph[1][0] = 1;
+		graph[1][1] = 0;
+		graph[1][2] = 1;
+		graph[1][3] = 0;
+		graph[1][4] = 1;
+		
+		graph[2][0] = 0;
+		graph[2][1] = 1;
+		graph[2][2] = 0;
+		graph[2][3] = 0;
+		graph[2][4] = 1;
+		
+		graph[3][0] = 0;
+		graph[3][1] = 0;
+		graph[3][2] = 0;
+		graph[3][3] = 0;
+		graph[3][4] = 0;
+		
+		graph[4][0] = 1;
+		graph[4][1] = 1;
+		graph[4][2] = 1;
+		graph[4][3] = 0;
+		graph[4][4] = 0;
+
 	}
 	int graph_size() {
 		return size;
@@ -91,14 +124,16 @@ bool new_graph::is_connected() {
 			if (open[i] && (close[i] == false)) {
 				close[i] = true;
 				c_size++;
-				for (int j = 0; j < size; ++j)
+				for (int j = 0; j < size; ++j){
 					open[j] = open[j] || graph[i][j];
+				}
 			}
 		}
+		
 		if (c_size == size ) return true;
 		if (old_size == c_size ) return false;
+
 	}
-	return true;
 }
 
 int main() {
