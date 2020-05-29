@@ -68,24 +68,35 @@ private:
 };
 
 // Implementation of the is connected 
-// algorithm invented by Ira Pohl.
+// algorithm invented by Ira Pohl. A 
+// generalization of this algorithm later
+// became known as breadth-first search.
 //
+
 bool new_graph::is_connected() {
 	int old_size = 0, c_size = 0;
 	bool* close = new bool[size];
 	bool* open = new bool[size];
 	for(int i=0; i<size; ++i) 
 		open[i] = close[i] = false;
+	
+	// Initially, the source '0' is reachable
 	open[0] = true;
 	
 	while(c_size < size) {
+		
 		for (int i = 0; i < size; ++i){
 			old_size = c_size;
-			if (open[i] && (close[i]== false)) {
+			// Adding nodes to the closed set
+			if (open[i] && (close[i] == false)) {
 				close[i] = true;
 				c_size++;
+				for (int j = 0; j < size; ++j)
+					open[j] = open[j] || graph[i][j];
 			}
 		}
+		if (c_size == size ) return true;
+		if (old_size == c_size ) return false;
 	}
 	return true;
 }
@@ -98,4 +109,5 @@ int main() {
 	g.generate();
 	cout << "\nGraph of size " << size << " is generated." << endl;	
 	g.print();
+	cout << g.is_connected() << endl;
 }
